@@ -4,9 +4,14 @@ The existing architecture and compose respositories have been deleted.
 Instead it will fallback to this repository
 
 ## Architecture
-Main - Multiplatform Compose + MVI
+Multiplatform Compose + MVI
+When events and effects occur due to user interaction, they are delivered to the processor.
+Processor processes business logic and updates changed UI state
 
-Bookmark - Muliplatform Compose + MVVM
+As shown below, Events are processed synchronously and Effects are processed asynchronously.
+
+
+Muliplatform Compose + MVVM
 
 ## Chagned libraries for multi-platform compatibility
 

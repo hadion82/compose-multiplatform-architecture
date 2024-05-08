@@ -78,10 +78,18 @@ The libraries used in this project are as follows.
 
 - Design - [Meterial3](https://android.googlesource.com/platform/frameworks/support/+/refs/heads/androidx-main/compose/material3/)
 
-- DI - [Kotlin-inject](https://github.com/evant/kotlin-inject)
+- DI - [kotlin-inject](https://github.com/evant/kotlin-inject)
 
 - Paging - [App cash Paging](https://github.com/cashapp/multiplatform-paging)
 
 - Logger - [Napier](https://github.com/AAkira/Napier)
 
 - Build flavor - [BuildKonfig](https://github.com/yshrsmz/BuildKonfig)
+
+- Datetime - [kotlin-datetime](https://github.com/Kotlin/kotlinx-datetime)
+
+- Permission - [accompanist](https://github.com/google/accompanist)
+
+- Crypto - [kotlincrypto](https://github.com/KotlinCrypto/core)
+
+- Number - [ionspin](https://github.com/ionspin/kotlin-multiplatform-bignum)

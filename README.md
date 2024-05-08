@@ -8,7 +8,7 @@ Instead it will fallback to this repository.
 ### Multiplatform
 Each module has both common code and platform-dependent code.
 
-![multiplatform](https://github.com/hadion82/compose-multiplatform-architecture/assets/11436005/d2e81c7d-338b-4366-97db-c0b3518876cf)
+![kmp-module](https://github.com/hadion82/compose-multiplatform-architecture/assets/11436005/bb4b41d4-1a9e-4f69-b6ab-a4e07249ea4d)
 
 
 ### Clean Architecture

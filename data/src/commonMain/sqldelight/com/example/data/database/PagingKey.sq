@@ -1,0 +1,12 @@
+import kotlin.Int;
+
+CREATE TABLE PagingKey (
+type TEXT NOT NULL PRIMARY KEY,
+key INTEGER AS Int NOT NULL DEFAULT 0
+);
+
+insertOrReplace:
+INSERT OR REPLACE INTO PagingKey(type, key) VALUES (?, ?);
+
+selectKey:
+SELECT * FROM PagingKey WHERE type = ?;

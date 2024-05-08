@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Compose Multiplatform</string>
+
+    <string name="marvel_characters">Marvel Characters</string>
+
+    <string name="label_bookmark">bookmark</string>
+    <string name="label_unknown">Unknown</string>
+
+    <string name="url_count">urls : %1$s</string>
+    <string name="comic_count">comics : %1$s</string>
+    <string name="story_count">stories : %1$s</string>
+    <string name="event_count">events : %1$s</string>
+    <string name="series_count">series : %1$s</string>
+    <string name="failed_to_bookmark">Failed to bookmark</string>
+    <string name="failed_to_delete_bookmark">Failed to delete bookmark</string>
+    <string name="image_saved_successfully">Image saved successfully</string>
+    <string name="failed_to_save_image">Failed to save image</string>
+    <string name="failed_to_load_data">Failed to load data</string>
+    <string name="end_of_list">End of List</string>
+    <string name="request_external_storage_permission">External storage permission required for this feature to be available.</string>
+
+    <string name="label_bookmarks">Bookmarks</string>
+    <string name="label_back">Back</string>
+</resources>

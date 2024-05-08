@@ -1,0 +1,48 @@
+import kotlin.Boolean;
+import kotlin.Int;
+import kotlinx.serialization.descriptors.PrimitiveKind.INT;
+
+CREATE TABLE Character (
+id INTEGER AS Int NOT NULL PRIMARY KEY,
+name TEXT,
+description TEXT,
+thumbnail TEXT,
+urlCount INTEGER AS Int NOT NULL,
+comicCount INTEGER AS Int NOT NULL,
+storyCount INTEGER AS Int NOT NULL,
+eventCount INTEGER AS Int NOT NULL,
+seriesCount INTEGER AS Int NOT NULL,
+mark INTEGER AS Boolean NOT NULL DEFAULT 0
+);
+
+-- QUEIRES
+insertOrReplace:
+INSERT OR REPLACE INTO Character(
+id, name, description, thumbnail, urlCount, comicCount, storyCount, eventCount, seriesCount
+) VALUES (?, ?, ?,?,?,?,?,?,?);
+
+update:
+UPDATE Character SET
+name = ?, description  = ?, thumbnail = ?, urlCount = ?,
+comicCount = ?, storyCount = ?, eventCount = ?, seriesCount = ? WHERE id = ?;
+
+updateMark:
+UPDATE Character SET mark = ? WHERE id = ?;
+
+selectIds:
+SELECT id FROM Character WHERE id IN ?;
+
+selectCharactersById:
+SELECT * FROM Character WHERE id IN ?;
+
+selectCharacters:
+SELECT * FROM Character LIMIT ? OFFSET ?;
+
+countCharacters:
+SELECT COUNT(*) FROM Character;
+
+selectBookmarks:
+SELECT * FROM Character WHERE mark = 1 LIMIT ? OFFSET ?;
+
+countBookmarks:
+SELECT COUNT(*) FROM Character WHERE mark = 1;

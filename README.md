@@ -25,7 +25,7 @@ Data flows one way and only the layer immediately below has dependencies :
 
 
 
-### Multiplatform Compose + MVI + Compose lifecycle observer
+### Compose Multiplatform + MVI
 
 When events and effects occur due to user interaction, they are delivered to the processor.
 
@@ -61,7 +61,7 @@ Concurrency and sequential task possible using Event and Effect
 
 
 
-## Muliplatform Compose + MVVM + Compose lifecycle observer
+### Compose Muliplatform + MVVM
 It is necessary to create a view model that matches the view life cycle of each platform, Android and iOS.
 
 UI updates should also be tailored to each platform's UI lifecycle.
@@ -69,7 +69,7 @@ UI updates should also be tailored to each platform's UI lifecycle.
 Other than that, it is the same as the general MVVM pattern.
 
 
-## Libraries for multi-platform compatibility
+## Libraries
 Many previously used libraries do not yet support multiplatform.
 
 If necessary, you need to change to a compatible library. 

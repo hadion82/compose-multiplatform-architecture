@@ -61,7 +61,13 @@ Concurrency and sequential task possible using Event and Effect
 
 
 
-## Muliplatform Compose + MVVM
+## Muliplatform Compose + MVVM + Compose lifecycle observer
+It is necessary to create a view model that matches the view life cycle of each platform, Android and iOS.
+
+UI updates should also be tailored to each platform's UI lifecycle.
+
+Other than that, it is the same as the general MVVM pattern.
+
 
 ## Libraries for multi-platform compatibility
 Many previously used libraries do not yet support multiplatform.

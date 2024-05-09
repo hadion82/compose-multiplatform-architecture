@@ -1,12 +1,13 @@
 # compose-multiplatform-architecture
 Project to support multiple platforms with one code.
-The existing architecture and compose respositories have been deleted. 
-Instead it will fallback to this repository.
+The existing architecture repository and compose respositories have been deleted.
+It has been integrated into this repository instead.
 
 ## Architecture
 
 ### Multiplatform
-Each module has both common code and platform-dependent code.
+Each modules can uses platform-specific API
+The Platform-specific APIs used are integrated into a common Kotlin API
 
 ![multiplatform](https://github.com/hadion82/compose-multiplatform-architecture/assets/11436005/7395dcff-ae90-4443-9f02-713b9bfdd086)
 

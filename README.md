@@ -1,13 +1,16 @@
 # compose-multiplatform-architecture
 Project to support multiple platforms with one code.
+
 The existing architecture repository and compose respositories have been deleted.
+
 It has been integrated into this repository instead.
 
 ## Architecture
 
 ### Multiplatform
-Each modules can uses platform-specific API
-The Platform-specific APIs used are integrated into a common Kotlin API
+Each modules can uses platform-specific API.
+
+The Platform-specific APIs used are integrated into a common Kotlin API.
 
 ![multiplatform](https://github.com/hadion82/compose-multiplatform-architecture/assets/11436005/7395dcff-ae90-4443-9f02-713b9bfdd086)
 
@@ -30,7 +33,7 @@ Data flows one way and only the layer immediately below has dependencies :
 
 When events and effects occur due to user interaction, they are delivered to the processor.
 
-Processor processes business logic and updates changed UI state
+Processor processes business logic and updates changed UI state.
 
 UI state is updated according to the Compose life cycle.
 
@@ -56,7 +59,7 @@ As an asynchronous task, it is output in the order in which the task is complete
 
 #### Event + Effect
 
-Concurrency and sequential task possible using Event and Effect
+Concurrency and sequential task possible using Event and Effect.
 
 ![event_effect](https://github.com/hadion82/compose-multiplatform-architecture/assets/11436005/f51b4d03-e7d9-4f5b-a44c-e59a4ef1fad6)
 

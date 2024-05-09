@@ -1,8 +1,6 @@
 # compose-multiplatform-architecture
 Project to support multiple platforms with one code.
-
 The existing architecture repository and compose respositories have been deleted.
-
 It has been integrated into this repository instead.
 
 ## Architecture

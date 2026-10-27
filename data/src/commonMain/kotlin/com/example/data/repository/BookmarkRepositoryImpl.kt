@@ -1,17 +1,22 @@
 package com.example.data.repository
 
-import app.cash.paging.Pager
-import app.cash.paging.PagingConfig
-import app.cash.paging.PagingData
-import com.example.data.database.Character
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.example.data.datasource.local.BookmarkLocalDataSource
 import com.example.data.datasource.local.BookmarkLocalDataSourceImpl
+import com.example.data.mapper.CharacterItemMapper
+import com.example.domain.model.CharacterItem
+import com.example.domain.repository.BookmarkRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import me.tatarka.inject.annotations.Inject
 
 @Inject
 class BookmarkRepositoryImpl (
-    private val dataSource: BookmarkLocalDataSourceImpl
+    private val dataSource: BookmarkLocalDataSourceImpl,
+    private val mapper: CharacterItemMapper
 ) : BookmarkRepository, BookmarkLocalDataSource by dataSource {
 
     override suspend fun addBookmark(id: Int) {
@@ -22,7 +27,7 @@ class BookmarkRepositoryImpl (
         dataSource.removeMark(id)
     }
 
-    override fun loadPagingBookmarks(): Flow<PagingData<Character>> =
+    override fun loadPagingBookmarks(): Flow<PagingData<CharacterItem>> =
         Pager(
             config = PagingConfig(
                 pageSize = 20,
@@ -32,5 +37,5 @@ class BookmarkRepositoryImpl (
             pagingSourceFactory = {
                 dataSource.selectBookmarks()
             }
-        ).flow
+        ).flow.map { pagingData -> pagingData.map(mapper) }
 }

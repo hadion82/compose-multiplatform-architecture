@@ -1,7 +1,7 @@
 package com.example.data.repository
 
-import app.cash.paging.PagingSource
-import app.cash.paging.PagingState
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.example.data.database.Character
 import com.example.data.datasource.local.CharacterLocalDataSource
 import com.example.data.datasource.local.CharacterLocalDataSourceImpl

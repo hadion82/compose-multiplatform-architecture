@@ -1,117 +1,87 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec
+import java.util.Properties
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.serialization)
     alias(libs.plugins.buildKonfig)
-//    alias(libs.plugins.ktor)
 }
 
-val localProperties = gradleLocalProperties(rootDir)
-
-fun getLocalProperties(key: String): String =
-    localProperties.getProperty(key)
+val localProperties = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.isFile) file.inputStream().use(::load)
+}
+fun apiKey(name: String): String =
+    providers.gradleProperty(name).orNull
+        ?: providers.environmentVariable(name).orNull
+        ?: localProperties.getProperty(name, "")
 
 kotlin {
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
+    android {
+        namespace = "com.example.data"
+        compileSdk {
+            version = release(libs.versions.android.compileSdk.get().toInt()) {
+                minorApiLevel = libs.versions.android.compileSdkMinor.get().toInt()
             }
         }
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
+        withHostTest {}
     }
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
+    listOf(iosArm64(), iosSimulatorArm64()).forEach {
         it.binaries.framework {
             baseName = "data"
             isStatic = true
         }
     }
-
     sourceSets {
         androidMain.dependencies {
             implementation(libs.cash.sqldelight.android)
-//            implementation(libs.cash.sqldelight.androidx.paging)
             implementation(libs.ktor.client.okhttp)
         }
         iosMain.dependencies {
             implementation(libs.cash.sqldelight.native)
             implementation(libs.ktor.client.darwin)
         }
-//        jvmMain.dependencies {
-//            implementation(libs.cash.sqldelight.jvm)
-//        }
         commonMain.dependencies {
+            api(projects.domain)
+            implementation(projects.shared)
             implementation(libs.cash.sqldelight.coroutines)
+            api(libs.cash.sqldelight.runtime)
             implementation(libs.cash.sqldelight.androidx.paging)
-            implementation(libs.cash.paging.compose.common)
-            implementation(libs.cash.paging.common)
-            implementation(libs.ktor.client.core)
+            implementation(libs.androidx.paging.common)
+            implementation(libs.jetbrains.coroutines)
+            implementation(libs.kotlinx.serialization.json)
+            api(libs.ktor.client.core)
+            implementation(libs.androidx.annotation)
             implementation(libs.ktor.client.logging)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.encoding)
             implementation(libs.coil.core)
             implementation(libs.coil.network)
-            implementation(libs.coil.compose)
-            implementation(libs.touchlab.stately.common)
-            implementation(libs.touchlab.stately.isolate)
-            implementation(libs.touchlab.stately.collections)
-            implementation(projects.shared)
+            implementation(libs.squareup.okio.common)
         }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
-    }
-    task("testClasses")
-}
-
-android {
-    namespace = "com.example.data"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    buildToolsVersion = "34.0.0"
-    ndkVersion = "23.1.7779620"
-    dependencies {
-        implementation(project(":shared"))
+        commonTest.dependencies { implementation(libs.kotlin.test) }
+        getByName("androidHostTest").dependencies { implementation(libs.kotlin.test.junit) }
     }
 }
 
 sqldelight {
     databases {
-        create("LocalDatabase") {
-            packageName.set("com.example.data.database")
-        }
+        create("LocalDatabase") { packageName.set("com.example.data.database") }
     }
 }
 
-/**
- * Access the https://developer.marvel.com/ and sign up for your account
- * Get your PRIVATE_KEY AND PUBLIC_KEY from 'Get Key' Menu
- * Set your key in local.properties file
- *
- * local.properties
- * API_PRIVATE_KEY = {Your private key}
- * API_PUBLIC_KEY = {Your public key}
- */
+// Marvel API credentials are optional for compilation and required for API calls.
 buildkonfig {
     packageName = "com.example.data"
     objectName = "ApiKey"
-
     defaultConfigs {
-        buildConfigField(FieldSpec.Type.STRING, "PRIVATE_KEY", getLocalProperties("API_PRIVATE_KEY"))
-        buildConfigField(FieldSpec.Type.STRING, "PUBLIC_KEY", getLocalProperties("API_PUBLIC_KEY"))
+        buildConfigField(FieldSpec.Type.STRING, "PRIVATE_KEY", apiKey("API_PRIVATE_KEY"))
+        buildConfigField(FieldSpec.Type.STRING, "PUBLIC_KEY", apiKey("API_PUBLIC_KEY"))
     }
 }

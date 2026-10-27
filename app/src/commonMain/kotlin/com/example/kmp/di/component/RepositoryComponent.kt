@@ -1,11 +1,11 @@
 package com.example.kmp.di.component
 
-import com.example.data.repository.ImageStreamRepository
-import com.example.data.repository.ImageStreamRepositoryImpl
-import com.example.data.repository.BookmarkRepository
 import com.example.data.repository.BookmarkRepositoryImpl
-import com.example.data.repository.CharacterRepository
 import com.example.data.repository.CharacterRepositoryImpl
+import com.example.data.repository.ImageStreamRepositoryImpl
+import com.example.domain.repository.BookmarkRepository
+import com.example.domain.repository.CharacterRepository
+import com.example.domain.repository.ImageStreamRepository
 import me.tatarka.inject.annotations.Provides
 
 interface RepositoryComponent {

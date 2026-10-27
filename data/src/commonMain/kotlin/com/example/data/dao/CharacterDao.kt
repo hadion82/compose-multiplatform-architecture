@@ -1,6 +1,6 @@
 package com.example.data.dao
 
-import app.cash.paging.PagingSource
+import androidx.paging.PagingSource
 import com.example.data.database.Character
 import com.example.data.database.LocalDatabase
 

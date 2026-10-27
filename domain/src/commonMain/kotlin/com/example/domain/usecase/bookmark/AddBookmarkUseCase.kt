@@ -1,6 +1,6 @@
 package com.example.domain.usecase.bookmark
 
-import com.example.data.repository.BookmarkRepository
+import com.example.domain.repository.BookmarkRepository
 import com.example.shared.di.Dispatcher
 import com.example.shared.interaction.SuspendingUseCase
 import me.tatarka.inject.annotations.Inject

@@ -11,24 +11,8 @@ struct ComposeView: UIViewControllerRepresentable {
 }
 
 struct ContentView: View {
-    private let component = ApplicationComponent.companion.create()
     var body: some View {
-
-    NavigationView {
         ComposeView()
-                    .ignoresSafeArea(.all) // Compose has own keyboard handler
-           }
+            .ignoresSafeArea(.all) // Compose has its own insets handling.
     }
-}
-
-extension UINavigationController: UIGestureRecognizerDelegate {
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-        interactivePopGestureRecognizer?.delegate = self
-    }
-    
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return viewControllers.count > 1
-    }
-
 }

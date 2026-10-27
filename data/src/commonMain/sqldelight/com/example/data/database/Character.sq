@@ -1,6 +1,5 @@
 import kotlin.Boolean;
 import kotlin.Int;
-import kotlinx.serialization.descriptors.PrimitiveKind.INT;
 
 CREATE TABLE Character (
 id INTEGER AS Int NOT NULL PRIMARY KEY,

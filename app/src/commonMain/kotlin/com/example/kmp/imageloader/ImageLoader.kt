@@ -2,20 +2,18 @@ package com.example.kmp.imageloader
 
 import coil3.ImageLoader
 import coil3.PlatformContext
-import coil3.annotation.ExperimentalCoilApi
-import coil3.fetch.NetworkFetcher
 import coil3.memory.MemoryCache
+import coil3.network.ktor3.KtorNetworkFetcherFactory
 import coil3.request.CachePolicy
 import coil3.request.crossfade
 import coil3.util.DebugLogger
 
-@OptIn(ExperimentalCoilApi::class)
 fun createImageLoader(
     context: PlatformContext,
     debug: Boolean = false
 ) = ImageLoader.Builder(context)
     .components {
-        add(NetworkFetcher.Factory())
+        add(KtorNetworkFetcherFactory())
     }
     .memoryCachePolicy(CachePolicy.ENABLED)
     .memoryCache {

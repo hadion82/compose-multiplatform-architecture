@@ -1,22 +1,27 @@
 package com.example.data.repository
 
 import androidx.paging.ExperimentalPagingApi
-import app.cash.paging.Pager
-import app.cash.paging.PagingConfig
-import app.cash.paging.PagingData
-import com.example.data.database.Character
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.example.data.datasource.local.CharacterLocalDataSourceImpl
+import com.example.data.mapper.CharacterItemMapper
+import com.example.domain.model.CharacterItem
+import com.example.domain.repository.CharacterRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import me.tatarka.inject.annotations.Inject
 
 @Inject
 class CharacterRepositoryImpl (
     private val localDataSource: CharacterLocalDataSourceImpl,
-    private val characterMediator: CharacterMediator
+    private val characterMediator: CharacterMediator,
+    private val mapper: CharacterItemMapper
 ) : CharacterRepository {
 
     @OptIn(ExperimentalPagingApi::class)
-    override fun loadPagingData(): Flow<PagingData<Character>> {
+    override fun loadPagingData(): Flow<PagingData<CharacterItem>> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
@@ -27,7 +32,7 @@ class CharacterRepositoryImpl (
             pagingSourceFactory = {
                 localDataSource.selectCharacters()
             }
-        ).flow
+        ).flow.map { pagingData -> pagingData.map(mapper) }
     }
 
     companion object {

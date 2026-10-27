@@ -1,10 +1,10 @@
 package com.example.domain.usecase.thumbnail
 
-import com.example.data.repository.ImageStreamRepository
+import com.example.domain.repository.ImageStreamRepository
 import com.example.shared.di.Dispatcher
 import com.example.shared.interaction.SuspendingUseCase
 import com.example.shared.utils.FileNameUtils
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import me.tatarka.inject.annotations.Inject
 
 @Inject

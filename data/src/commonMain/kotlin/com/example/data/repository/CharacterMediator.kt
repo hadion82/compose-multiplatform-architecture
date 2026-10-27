@@ -1,9 +1,9 @@
 package com.example.data.repository
 
 import androidx.paging.ExperimentalPagingApi
-import app.cash.paging.LoadType
-import app.cash.paging.PagingState
-import app.cash.paging.RemoteMediator
+import androidx.paging.LoadType
+import androidx.paging.PagingState
+import androidx.paging.RemoteMediator
 import com.example.data.database.Character
 import com.example.data.database.PagingKey
 import com.example.data.datasource.local.CharacterLocalDataSource

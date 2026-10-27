@@ -5,10 +5,10 @@ import com.example.shared.platform.secure.Secure
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.HttpSend
-import io.ktor.client.plugins.HttpTimeout
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.HttpTimeoutConfig
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiationConfig
 import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.logging.LoggingConfig
 import io.ktor.client.plugins.plugin
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
@@ -18,13 +18,13 @@ import kotlinx.serialization.json.Json
 
 expect val client: HttpClient
 
-fun HttpTimeout.HttpTimeoutCapabilityConfiguration.default() {
+fun HttpTimeoutConfig.default() {
     connectTimeoutMillis = 60_000
     socketTimeoutMillis = 60_000
     requestTimeoutMillis = 60_000
 }
 
-fun Logging.Config.default() {
+fun LoggingConfig.default() {
     //Release Mode
     level = LogLevel.NONE
     //Debug Mode
@@ -38,7 +38,7 @@ fun Logging.Config.default() {
 }
 
 @OptIn(ExperimentalSerializationApi::class)
-fun ContentNegotiation.Config.default() {
+fun ContentNegotiationConfig.default() {
     json(Json {
         prettyPrint = true
         isLenient = true

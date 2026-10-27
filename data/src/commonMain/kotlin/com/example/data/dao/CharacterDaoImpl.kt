@@ -1,6 +1,6 @@
 package com.example.data.dao
 
-import app.cash.paging.PagingSource
+import androidx.paging.PagingSource
 import app.cash.sqldelight.paging3.QueryPagingSource
 import com.example.data.database.Character
 import com.example.data.database.LocalDatabase
@@ -50,8 +50,9 @@ class CharacterDaoImpl(
             }
         }
 
-    override suspend fun updateMark(id: Int, mark: Boolean) =
+    override suspend fun updateMark(id: Int, mark: Boolean) {
         characterQueries.updateMark(mark, id)
+    }
 
     override suspend fun selectIds(ids: List<Int>): List<Int> =
         characterQueries.selectIds(ids).executeAsList()

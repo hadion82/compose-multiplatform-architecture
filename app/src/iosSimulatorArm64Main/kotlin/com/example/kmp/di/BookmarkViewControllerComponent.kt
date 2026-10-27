@@ -1,4 +1,5 @@
 package com.example.kmp.di
 
-actual fun BookmarkViewControllerComponent.Companion.create(): BookmarkViewControllerComponent =
-    BookmarkViewControllerComponent::class.create(applicationComponent)
+actual fun BookmarkViewControllerComponent.Companion.create(
+    parent: ApplicationComponent
+): BookmarkViewControllerComponent = BookmarkViewControllerComponent::class.create(parent)

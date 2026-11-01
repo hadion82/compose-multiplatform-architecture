@@ -81,7 +81,10 @@ buildkonfig {
     packageName = "com.example.data"
     objectName = "ApiKey"
     defaultConfigs {
-        buildConfigField(FieldSpec.Type.STRING, "PRIVATE_KEY", apiKey("API_PRIVATE_KEY"))
-        buildConfigField(FieldSpec.Type.STRING, "PUBLIC_KEY", apiKey("API_PUBLIC_KEY"))
+//        buildConfigField(FieldSpec.Type.STRING, "PRIVATE_KEY", apiKey("API_PRIVATE_KEY"))
+//        buildConfigField(FieldSpec.Type.STRING, "PUBLIC_KEY", apiKey("API_PUBLIC_KEY"))
+        //지원 API 만료로 인해 임시로 주석처리 및 빌드 오류 해결
+        buildConfigField(FieldSpec.Type.STRING, "PRIVATE_KEY", "test")
+        buildConfigField(FieldSpec.Type.STRING, "PUBLIC_KEY", "test")
     }
 }
